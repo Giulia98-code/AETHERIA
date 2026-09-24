@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetheria // Museum Presentation</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html {
+            width: 100%; height: 100%;
+            background-color: #010003;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Lettore video a schermo intero */
+        video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            display: none;
+            z-index: 1;
+        }
+
+        /* Schermata di caricamento e dettagli */
+        .upload-screen {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: rgba(10, 2, 20, 0.92);
+            border: 1px solid rgba(255, 0, 255, 0.35);
+            padding: 35px 45px;
+            border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            max-width: 520px;
+            width: 90%;
+        }
+
+        .upload-screen h1 {
+            color: #fff;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .upload-screen > p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .upload-btn-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            color: #000;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .upload-btn-label:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+        }
+
+        #videoUpload {
+            display: none;
+        }
+
+        /* Sezione aggiuntiva con presentazione, prezzo, tasto e nota sul codice */
+        .purchase-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 20px;
+            text-align: left;
+        }
+
+        .artwork-description {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.75rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Evidenza chiara per l'invio del codice post-acquisto */
+        .code-delivery-notice {
+            color: #00ffff;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            background: rgba(0, 255, 255, 0.08);
+            border-left: 2px solid #00ffff;
+            padding: 6px 10px;
+        }
+
+        .pricing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-tag {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .buy-btn {
+            background: linear-gradient(135deg, #ff00ff, #7928ca);
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+        }
+
+        /* Targa da museo in basso durante la riproduzione video */
+        .museum-plaque {
+            position: absolute;
+            bottom: 35px;
+            left: 45px;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            pointer-events: none;
+            z-index: 20;
+            text-transform: uppercase;
+            border-left: 1px solid rgba(255, 0, 255, 0.4);
+            padding-left: 14px;
+            line-height: 1.6;
+            display: none;
+        }
+        .museum-plaque span {
+            display: block;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Box centrale con upload e dettagli d'acquisto sotto -->
+    <div class="upload-screen" id="uploadScreen">
+        <h1>Aetheria Presentation</h1>
+        <p>Carica il file video master (1m 42s)</p>
+        
+        <label class="upload-btn-label">
+            Seleziona Video
+            <input type="file" id="videoUpload" accept="video/*">
+        </label>
+
+        <!-- Sezione dettagli, prezzo e invio codice -->
+        <div class="purchase-section">
+            <div class="artwork-description">
+                Aetheria is an immersive generative digital installation exploring quantum flux and luminous singularity. Presented as a unique limited edition piece.
+            </div>
+            
+            <div class="code-delivery-notice">
+                ⚡ Included: Upon purchase, you will receive the exact source code used to generate this artwork.
+            </div>
+
+            <div class="pricing-row">
+                <span class="price-tag">€150.00</span>
+                <!-- Inserisci qui il link di acquisto (Gumroad / PayPal) -->
+                <a href="#" class="buy-btn" target="_blank">Acquista Opera</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elemento video per la riproduzione -->
+    <video id="presentationVideo" autoplay loop playsinline></video>
+
+    <!-- Targa da museo posizionata in basso -->
+    <div class="museum-plaque" id="museumPlaque">
+        <span>Aetheria // Quantum Singularity</span>
+        Generative Digital Installation &bull; Unique Edition 1/15
+    </div>
+
+    <script>
+        const videoUpload = document.getElementById('videoUpload');
+        const presentationVideo = document.getElementById('presentationVideo');
+        const uploadScreen = document.getElementById('uploadScreen');
+        const museumPlaque = document.getElementById('museumPlaque');
+
+        videoUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+                presentationVideo.src = fileURL;
+                
+                uploadScreen.style.display = 'none';
+                presentationVideo.style.display = 'block';
+                museumPlaque.style.display = 'block';
+                
+                presentationVideo.play();
+            }
+        });
+    </script>
+</body>
+</html>
