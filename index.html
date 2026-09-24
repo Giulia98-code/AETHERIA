@@ -6,22 +6,20 @@
     <title>Aetheria // Museum Presentation</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body, html {
-            width: 100%; height: 100%;
+        body {
             background-color: #010003;
-            overflow-x: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             color: #fff;
-        }
-
-        /* Layout principale stile galleria d'arte minimalista */
-        .gallery-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
         }
 
         header {
@@ -44,52 +42,37 @@
             text-transform: uppercase;
         }
 
-        /* Riquadro elegante per l'installazione video */
-        .video-frame {
+        /* Cornice fissa per il video */
+        .video-box {
             width: 100%;
             aspect-ratio: 16 / 9;
-            background: #05000a;
+            background: #000;
             border: 1px solid rgba(255, 0, 255, 0.2);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         video {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            display: none; /* Appare quando carichi il video */
+            object-fit: cover;
+            display: block;
         }
 
-        /* Messaggio iniziale nel riquadro se il video non è caricato */
-        .placeholder-text {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* Targa da museo integrata sotto al riquadro o nell'angolo */
+        /* Targa da museo sotto al video */
         .museum-plaque {
-            width: 100%;
             margin-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
             border-left: 2px solid rgba(255, 0, 255, 0.5);
             padding-left: 15px;
+            margin-bottom: 30px;
         }
 
         .plaque-title {
             font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 2px;
-            color: #fff;
             text-transform: uppercase;
         }
 
@@ -101,14 +84,12 @@
             margin-top: 3px;
         }
 
-        /* Sezione di acquisto sotto */
+        /* Scheda di acquisto */
         .purchase-card {
-            width: 100%;
             background: rgba(15, 5, 25, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             padding: 30px;
-            margin-top: 30px;
             backdrop-filter: blur(10px);
         }
 
@@ -143,7 +124,6 @@
             font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: 1px;
-            color: #fff;
         }
 
         .buy-btn {
@@ -166,55 +146,32 @@
             transform: scale(1.05);
             box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
         }
-
-        /* Pannello di upload segreto (visibile solo a te premendo il tasto "U") */
-        .admin-upload-panel {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(20, 5, 30, 0.95);
-            border: 1px solid #ff00ff;
-            padding: 15px 20px;
-            border-radius: 8px;
-            z-index: 1000;
-            display: none; /* Nascosto agli utenti */
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
-        }
-
-        .admin-upload-panel label {
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            color: #00ffff;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
 
-    <div class="gallery-container">
+    <div class="container">
         <header>
             <h1>Aetheria Collection</h1>
             <p>Museum Exhibition View</p>
         </header>
 
-        <!-- Riquadro dell'opera -->
-        <div class="video-frame" id="videoFrame">
-            <div class="placeholder-text" id="placeholderText">Aetheria Master Preview</div>
-            <video id="presentationVideo" autoplay loop playsinline></video>
+        <!-- Riquadro del video registrato -->
+        <div class="video-box">
+            <video autoplay muted loop playsinline>
+                <!-- Sostituisci "tuo-video.mp4" con il nome esatto del file video caricato nel repository -->
+                <source src="tuo-video.mp4" type="video/mp4">
+                Il tuo browser non supporta il tag video.
+            </video>
         </div>
 
         <!-- Targa da museo -->
         <div class="museum-plaque">
-            <div>
-                <div class="plaque-title">Aetheria // Quantum Singularity</div>
-                <div class="plaque-details">Generative Digital Installation &bull; Unique Edition 1/15</div>
-            </div>
+            <div class="plaque-title">Aetheria // Quantum Singularity</div>
+            <div class="plaque-details">Generative Digital Installation &bull; Unique Edition 1/15</div>
         </div>
 
-        <!-- Riquadro con descrizione, prezzo e tasto d'acquisto -->
+        <!-- Sezione acquisto pulita -->
         <div class="purchase-card">
             <div class="artwork-description">
                 Aetheria is an immersive generative digital installation exploring quantum flux and luminous singularity. Presented as a unique limited edition piece designed for high-end digital displays.
@@ -226,42 +183,11 @@
 
             <div class="pricing-row">
                 <span class="price-tag">€150.00</span>
-                <!-- Inserisci qui il tuo link di acquisto (Gumroad / PayPal) -->
+                <!-- Inserisci qui il tuo link di acquisto (es. Gumroad) -->
                 <a href="#" class="buy-btn" target="_blank">Acquista Opera</a>
             </div>
         </div>
     </div>
 
-    <!-- Pannello nascosto per caricare il video (riservato a te) -->
-    <div class="admin-upload-panel" id="adminPanel">
-        <label>Carica Video Master (Tuo Pannello)</label>
-        <input type="file" id="videoUpload" accept="video/*">
-    </div>
-
-    <script>
-        const videoUpload = document.getElementById('videoUpload');
-        const presentationVideo = document.getElementById('presentationVideo');
-        const placeholderText = document.getElementById('placeholderText');
-        const adminPanel = document.getElementById('adminPanel');
-
-        // COMANDO SEGRETO: Premi il tasto "U" sulla tastiera per far comparire il tasto di caricamento video
-        window.addEventListener('keydown', function(e) {
-            if (e.key.toLowerCase() === 'u') {
-                adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' 'block';
-            }
-        });
-
-        videoUpload.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const fileURL = URL.createObjectURL(file);
-                presentationVideo.src = fileURL;
-                placeholderText.style.display = 'none';
-                presentationVideo.style.display = 'block';
-                presentationVideo.play();
-                adminPanel.style.display = 'none'; // Richiude il pannello dopo il caricamento
-            }
-        });
-    </script>
 </body>
 </html>
