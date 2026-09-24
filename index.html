@@ -42,7 +42,6 @@
             text-transform: uppercase;
         }
 
-        /* Cornice fissa per il video */
         .video-box {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -61,7 +60,6 @@
             display: block;
         }
 
-        /* Targa da museo sotto al video */
         .museum-plaque {
             margin-top: 15px;
             border-left: 2px solid rgba(255, 0, 255, 0.5);
@@ -84,7 +82,6 @@
             margin-top: 3px;
         }
 
-        /* Scheda di acquisto */
         .purchase-card {
             background: rgba(15, 5, 25, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -130,7 +127,7 @@
             background: linear-gradient(135deg, #ff00ff, #7928ca);
             color: #fff;
             border: none;
-            padding: 12px 28px;
+            padding: v12px 28px;
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -156,21 +153,19 @@
             <p>Museum Exhibition View</p>
         </header>
 
-        <!-- Riquadro del video -->
         <div class="video-box">
-            <video autoplay muted loop playsinline>
+            <!-- Aggiunto preload auto e controlli di riproduzione forzata -->
+            <video autoplay muted loop playsinline preload="auto" id="artVideo">
                 <source src="Screen recording 2026-09-24 02.30.35.webm" type="video/webm">
                 Il tuo browser non supporta il tag video.
             </video>
         </div>
 
-        <!-- Targa da museo -->
         <div class="museum-plaque">
             <div class="plaque-title">Aetheria // Quantum Singularity</div>
             <div class="plaque-details">Generative Digital Installation &bull; Unique Edition 1/15</div>
         </div>
 
-        <!-- Sezione acquisto -->
         <div class="purchase-card">
             <div class="artwork-description">
                 Aetheria is an immersive generative digital installation exploring quantum flux and luminous singularity. Presented as a unique limited edition piece designed for high-end digital displays.
@@ -182,11 +177,20 @@
 
             <div class="pricing-row">
                 <span class="price-tag">€150.00</span>
-                <!-- Inserisci qui il tuo link di acquisto (es. Gumroad) -->
                 <a href="#" class="buy-btn" target="_blank">Acquista Opera</a>
             </div>
         </div>
     </div>
 
+    <script>
+        // Forza la riproduzione anche in caso di blocchi dei browser moderni
+        document.addEventListener("DOMContentLoaded", function() {
+            const vid = document.getElementById("artVideo");
+            vid.play().catch(error => {
+                console.log("Autoplay impedito dal browser, richiesto evento utente", error);
+                vid.controls = true; // Mostra i controlli se il browser blocca l'autoplay
+            });
+        });
+    </script>
 </body>
 </html>
