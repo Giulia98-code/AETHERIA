@@ -7,9 +7,9 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background-color: #010003;
+            background-color: #030305;
             color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -42,7 +42,7 @@
             text-transform: uppercase;
         }
 
-        /* Riquadro che ospita l'opera generativa */
+        /* Cornice dell'opera */
         .video-box {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -54,9 +54,10 @@
             position: relative;
         }
 
-        canvas {
+        video {
             width: 100%;
             height: 100%;
+            object-fit: cover;
             display: block;
         }
 
@@ -155,9 +156,12 @@
             <p>Museum Exhibition View</p>
         </header>
 
-        <!-- Riquadro con animazione generativa in tempo reale -->
+        <!-- Riquadro del video con il nome esatto del file caricato su GitHub -->
         <div class="video-box">
-            <canvas id="generativeCanvas"></canvas>
+            <video autoplay muted loop playsinline controls>
+                <source src="Screen recording 2026-09-24 02.30.35.webm" type="video/webm">
+                Il tuo browser non supporta il tag video.
+            </video>
         </div>
 
         <!-- Targa da museo -->
@@ -178,61 +182,10 @@
 
             <div class="pricing-row">
                 <span class="price-tag">€150.00</span>
-                <!-- Inserisci qui il tuo link di acquisto (es. Gumroad) -->
                 <a href="#" class="buy-btn" target="_blank">Acquista Opera</a>
             </div>
         </div>
     </div>
 
-    <script>
-        // Script generativo per l'animazione fluida all'interno del riquadro
-        const canvas = document.getElementById('generativeCanvas');
-        const ctx = canvas.getContext('2d');
-
-        function resize() {
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = canvas.parentElement.clientHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        let particles = [];
-        let numParticles = 120;
-
-        for (let i = 0; i < numParticles; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 1.5,
-                vy: (Math.random() - 0.5) * 1.5,
-                size: Math.random() * 2.5 + 1,
-                color: Math.random() > 0.5 ? '#ff00ff' : '#00ffff'
-            });
-        }
-
-        function animate() {
-            ctx.fillStyle = 'rgba(1, 0, 3, 0.2)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(p => {
-                p.x += p.vx;
-                p.y += p.vy;
-
-                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = p.color;
-                ctx.fill();
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    </script>
 </body>
 </html>
