@@ -9,123 +9,148 @@
         body, html {
             width: 100%; height: 100%;
             background-color: #010003;
-            overflow: hidden;
+            overflow-x: hidden;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #fff;
+        }
+
+        /* Layout principale stile galleria d'arte minimalista */
+        .gallery-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+        }
+
+        /* Riquadro elegante per l'installazione video */
+        .video-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #05000a;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Lettore video a schermo intero */
         video {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            display: none;
-            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none; /* Appare quando carichi il video */
         }
 
-        /* Schermata di caricamento e dettagli */
-        .upload-screen {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            background: rgba(10, 2, 20, 0.92);
-            border: 1px solid rgba(255, 0, 255, 0.35);
-            padding: 35px 45px;
-            border-radius: 14px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.85);
-            backdrop-filter: blur(12px);
-            max-width: 520px;
-            width: 90%;
-        }
-
-        .upload-screen h1 {
-            color: #fff;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .upload-screen > p {
-            color: rgba(255, 255, 255, 0.6);
+        /* Messaggio iniziale nel riquadro se il video non è caricato */
+        .placeholder-text {
+            color: rgba(255, 255, 255, 0.3);
             font-size: 0.8rem;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .upload-btn-label {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff00ff, #00ffff);
-            color: #000;
-            font-weight: 600;
-            font-size: 0.8rem;
-            text-transform: uppercase;
             letter-spacing: 2px;
-            padding: 10px 24px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 25px;
+            text-transform: uppercase;
         }
 
-        .upload-btn-label:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+        /* Targa da museo integrata sotto al riquadro o nell'angolo */
+        .museum-plaque {
+            width: 100%;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-left: 2px solid rgba(255, 0, 255, 0.5);
+            padding-left: 15px;
         }
 
-        #videoUpload {
-            display: none;
+        .plaque-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
         }
 
-        /* Sezione aggiuntiva con presentazione, prezzo, tasto e nota sul codice */
-        .purchase-section {
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            padding-top: 20px;
-            text-align: left;
+        .plaque-details {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        /* Sezione di acquisto sotto */
+        .purchase-card {
+            width: 100%;
+            background: rgba(15, 5, 25, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
         }
 
         .artwork-description {
+            font-size: 0.8rem;
+            line-height: 1.6;
             color: rgba(255, 255, 255, 0.75);
-            font-size: 0.75rem;
-            line-height: 1.5;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             letter-spacing: 0.5px;
         }
 
-        /* Evidenza chiara per l'invio del codice post-acquisto */
         .code-delivery-notice {
             color: #00ffff;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 18px;
-            background: rgba(0, 255, 255, 0.08);
+            margin-bottom: 20px;
+            background: rgba(0, 255, 255, 0.05);
             border-left: 2px solid #00ffff;
-            padding: 6px 10px;
+            padding: 8px 12px;
         }
 
         .pricing-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
         }
 
         .price-tag {
-            color: #fff;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: 1px;
+            color: #fff;
         }
 
         .buy-btn {
             background: linear-gradient(135deg, #ff00ff, #7928ca);
             color: #fff;
             border: none;
-            padding: 10px 22px;
+            padding: 12px 28px;
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -142,46 +167,57 @@
             box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
         }
 
-        /* Targa da museo in basso durante la riproduzione video */
-        .museum-plaque {
-            position: absolute;
-            bottom: 35px;
-            left: 45px;
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.7rem;
-            letter-spacing: 4px;
-            pointer-events: none;
-            z-index: 20;
-            text-transform: uppercase;
-            border-left: 1px solid rgba(255, 0, 255, 0.4);
-            padding-left: 14px;
-            line-height: 1.6;
-            display: none;
+        /* Pannello di upload segreto (visibile solo a te premendo il tasto "U") */
+        .admin-upload-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(20, 5, 30, 0.95);
+            border: 1px solid #ff00ff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            display: none; /* Nascosto agli utenti */
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
         }
-        .museum-plaque span {
+
+        .admin-upload-panel label {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: #00ffff;
+            text-transform: uppercase;
             display: block;
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 600;
-            letter-spacing: 2px;
+            margin-bottom: 8px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <!-- Box centrale con upload e dettagli d'acquisto sotto -->
-    <div class="upload-screen" id="uploadScreen">
-        <h1>Aetheria Presentation</h1>
-        <p>Carica il file video master (1m 42s)</p>
-        
-        <label class="upload-btn-label">
-            Seleziona Video
-            <input type="file" id="videoUpload" accept="video/*">
-        </label>
+    <div class="gallery-container">
+        <header>
+            <h1>Aetheria Collection</h1>
+            <p>Museum Exhibition View</p>
+        </header>
 
-        <!-- Sezione dettagli, prezzo e invio codice -->
-        <div class="purchase-section">
+        <!-- Riquadro dell'opera -->
+        <div class="video-frame" id="videoFrame">
+            <div class="placeholder-text" id="placeholderText">Aetheria Master Preview</div>
+            <video id="presentationVideo" autoplay loop playsinline></video>
+        </div>
+
+        <!-- Targa da museo -->
+        <div class="museum-plaque">
+            <div>
+                <div class="plaque-title">Aetheria // Quantum Singularity</div>
+                <div class="plaque-details">Generative Digital Installation &bull; Unique Edition 1/15</div>
+            </div>
+        </div>
+
+        <!-- Riquadro con descrizione, prezzo e tasto d'acquisto -->
+        <div class="purchase-card">
             <div class="artwork-description">
-                Aetheria is an immersive generative digital installation exploring quantum flux and luminous singularity. Presented as a unique limited edition piece.
+                Aetheria is an immersive generative digital installation exploring quantum flux and luminous singularity. Presented as a unique limited edition piece designed for high-end digital displays.
             </div>
             
             <div class="code-delivery-notice">
@@ -190,38 +226,40 @@
 
             <div class="pricing-row">
                 <span class="price-tag">€150.00</span>
-                <!-- Inserisci qui il link di acquisto (Gumroad / PayPal) -->
+                <!-- Inserisci qui il tuo link di acquisto (Gumroad / PayPal) -->
                 <a href="#" class="buy-btn" target="_blank">Acquista Opera</a>
             </div>
         </div>
     </div>
 
-    <!-- Elemento video per la riproduzione -->
-    <video id="presentationVideo" autoplay loop playsinline></video>
-
-    <!-- Targa da museo posizionata in basso -->
-    <div class="museum-plaque" id="museumPlaque">
-        <span>Aetheria // Quantum Singularity</span>
-        Generative Digital Installation &bull; Unique Edition 1/15
+    <!-- Pannello nascosto per caricare il video (riservato a te) -->
+    <div class="admin-upload-panel" id="adminPanel">
+        <label>Carica Video Master (Tuo Pannello)</label>
+        <input type="file" id="videoUpload" accept="video/*">
     </div>
 
     <script>
         const videoUpload = document.getElementById('videoUpload');
         const presentationVideo = document.getElementById('presentationVideo');
-        const uploadScreen = document.getElementById('uploadScreen');
-        const museumPlaque = document.getElementById('museumPlaque');
+        const placeholderText = document.getElementById('placeholderText');
+        const adminPanel = document.getElementById('adminPanel');
+
+        // COMANDO SEGRETO: Premi il tasto "U" sulla tastiera per far comparire il tasto di caricamento video
+        window.addEventListener('keydown', function(e) {
+            if (e.key.toLowerCase() === 'u') {
+                adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' 'block';
+            }
+        });
 
         videoUpload.addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
                 const fileURL = URL.createObjectURL(file);
                 presentationVideo.src = fileURL;
-                
-                uploadScreen.style.display = 'none';
+                placeholderText.style.display = 'none';
                 presentationVideo.style.display = 'block';
-                museumPlaque.style.display = 'block';
-                
                 presentationVideo.play();
+                adminPanel.style.display = 'none'; // Richiude il pannello dopo il caricamento
             }
         });
     </script>
